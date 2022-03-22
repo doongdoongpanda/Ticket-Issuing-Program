@@ -29,7 +29,7 @@ for(index; index<=10;)//반복
 	do
 	{
 	printf("권종을 선택하세요\n");
-	printf("1. 종합이용권(이용범위:롯데월드+민속박물관)\n2. 파크이용권(이용범위:롯데월드))\n");
+	printf("1. 종합이용권(이용범위:판다랜드+민속박물관)\n2. 파크이용권(이용범위:판다랜드))\n");
 	scanf("%d",&type[index]);
 		if ( !(type[index] ==1 || type[index] ==2)){
 			printf("잘못 입력하였습니다.\n\n");
@@ -58,7 +58,7 @@ for(index; index<=10;)//반복
 	while ( id >= 1000000);
 	do
 	{
-	printf("권종을 선택하세요\n");
+	printf("갯수를 선택하세요\n");
 	scanf("%d",&count[index]);
 		if ( count[index] > 10){
 		printf("잘못 입력하였습니다.\n\n");}
