@@ -230,7 +230,7 @@ printf("만나이 %d살,가격은 %d원입니다.\n감사합니다.\n\n",globalAge, totalPrice[i
 	scanf("%d", &issue);
 	if(issue == 1)//발권으로 돌아가기 
 		{ 
-		printf("------- 발권을 시작합니다. -------\n");
+		printf("---------- 발권을 시작합니다. ----------\n");
 		index++;
 		continue;
 		}
