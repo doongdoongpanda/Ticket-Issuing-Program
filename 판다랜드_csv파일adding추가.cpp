@@ -238,7 +238,7 @@ for(index; index<=10;)//반복
 		printf("======================%s========================\n","판다랜드");
 	
 		for(int i=0; i<=index; i++){
-		fprintf(fp, "%d, %d, %d, %d, %d\n",  recordingType[i], recordingTime[i], recordingCount[i], recordingDiscount[i], recordingTotalPrice[i]);//csv파일 생성 add모드 
+		fprintf(fp, "%d%d%d, %d, %d, %d, %d, %d\n", todayYear[i], todayMonth[i], todayDate[i], recordingType[i], recordingTime[i], recordingCount[i], recordingDiscount[i], recordingTotalPrice[i]);//csv파일 생성 add모드 
 			if(recordingType[i] == 1){printf("종합이용권\n");//권종인쇄 
 		} 
 			else {printf("파크이용권\n");}
@@ -246,7 +246,7 @@ for(index; index<=10;)//반복
 		} 
 			else {printf("%s\t", "After4");}
 	printf("X\t%d개\t",recordingCount[i]);//개수 인쇄 
-	printf("%5d원\t", recordingTotalPrice[i]);//금액인쇄 
+	printf("%4d원\t", recordingTotalPrice[i]);//금액인쇄 
 
 	//우대사항 문구 인쇄 
 	if	(recordingDiscount[i] == 1){//일반 
