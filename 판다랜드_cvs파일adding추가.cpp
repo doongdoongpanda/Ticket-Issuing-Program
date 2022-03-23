@@ -13,12 +13,13 @@ int main()
 	const int END_1 = 31, END_2=28, END_3 = 31, END_4 = 30, END_5 = 31, END_6 = 30, END_7 = 31, END_8 = 31;
 	const int END_9 = 30, END_10= 31, END_11 = 30, END_12 = 31;
 	const int FREE = 0, PRICE_LESS_3YEAR = 15000;
+	int recordingTime[10], recordingType[10], recordingCount[10], recordingDiscount[10], recordingTotalPrice[10];//그룹설정함수 
+	int todayYear[10], todayMonth[10], todayDate[10];//오늘날짜 그룹 
 	int birthYear, birthMonth, birthDate, globalBirth, priceEnter, days, tdays, issue, continueOrder, index = 0;
+	int time, type, count, discount, totalPrice;
 	int tm_year, tm_mon, tm_mday;//today
 	long long int id;
 	float discountRate;
-	int time[10]={0}, type[10]={0}, count[10]={0}, discount[10]={0}, totalPrice[10]={0};
-	int todayYear[10], todayMonth[10], todayDate[10];//오늘날짜 그룹 
 
 for(index; index<=10;)//반복 
 {
@@ -26,22 +27,22 @@ for(index; index<=10;)//반복
 	{
 	printf("권종을 선택하세요\n");
 	printf("1. 종합이용권(이용범위:판다랜드+민속박물관)\n2. 파크이용권(이용범위:판다랜드)\n");
-	scanf("%d",&type[index]);
-		if ( !(type[index] ==1 || type[index] ==2)){
+	scanf("%d",&type);
+		if ( !(type ==1 || type ==2)){
 			printf("잘못 입력하였습니다.\n\n");
 		}
 	}
-	while( !(type[index] ==1 || type[index] ==2));
+	while( !(type ==1 || type ==2));
 	do
 	{
 	printf("\n이용시간을 선택하세요\n");
 	printf("1.1DAY\n2.After4(오후4시부터 입장)\n");
-	scanf("%d",&time[index]);
-		if ( !(time[index] ==1 || time[index] ==2)){
+	scanf("%d",&time);
+		if ( !(time ==1 || time ==2)){
 		printf("잘못 입력하였습니다.\n\n");
 		}
 	}
-	while(!(time[index] ==1 || time[index] ==2));
+	while(!(time ==1 || time ==2));
 	
 	do
 	{
@@ -55,21 +56,21 @@ for(index; index<=10;)//반복
 	do
 	{
 	printf("\n갯수를 선택하세요\n");
-	scanf("%d",&count[index]);
-		if ( count[index] > 10){
+	scanf("%d",&count);
+		if ( count > 10){
 		printf("잘못 입력하였습니다.\n\n");}
 	}
-	while( count[index] > 10);
+	while( count > 10);
 	do
 	{
 	printf("\n우대사항을 선택하세요\n");
 	printf("1.없음\n2.장애인\n3.국가유공자\n4.휴가장병\n5.임산부\n6.다자녀\n");
-	scanf("%d",&discount[index]);		
-		if(!(discount[index] ==1 || discount[index] ==2 || discount[index] ==3 || discount[index] ==4 || discount[index] ==5 || discount[index] ==6)){
+	scanf("%d",&discount);		
+		if(!(discount ==1 || discount ==2 || discount ==3 || discount ==4 || discount ==5 || discount ==6)){
 		printf("잘못 입력하였습니다.\n\n");	
 		}
 	}
-	while(!(discount[index] ==1 || discount[index] ==2 || discount[index] ==3 || discount[index] ==4 || discount[index] ==5 || discount[index] ==6));
+	while(!(discount ==1 || discount ==2 || discount ==3 || discount ==4 || discount ==5 || discount ==6));
 	
 //생년월일로 자르기
 	birthYear= (id/10000);
@@ -142,81 +143,87 @@ for(index; index<=10;)//반복
 	if (globalAge >= 1 && globalAge <3){
 		priceEnter = PRICE_LESS_3YEAR;}
 	if ((globalAge >= 3 && globalAge <12) || globalAge >=65){
-		if(type[index] == 1){
-			if(time[index] == 1){
+		if(type == 1){
+			if(time == 1){
 			priceEnter = 47000;}
 			else{
 			priceEnter = 36000;}
 		}
 		else{
-			if(time[index] == 1){
+			if(time == 1){
 				priceEnter = 46000;}
 			else {
 				priceEnter = 35000;}
 		}
 	}
 	if (globalAge>= 12 && globalAge <18){
-		if(type[index] == 1){
-			if(time[index] == 1){
+		if(type == 1){
+			if(time == 1){
 			priceEnter = 52000;}
 			else{
 			priceEnter = 42000;}
 		}
 		else{
-			if(time[index] == 1){
+			if(time == 1){
 				priceEnter =50000;}
 			else {
 				priceEnter =40000;}
 		}		
 	}
 	if (globalAge>= 18 && globalAge <65){
-		if(type[index] == 1){
-			if(time[index] == 1){
+		if(type == 1){
+			if(time == 1){
 			priceEnter = 59000;}
 			else{
 			priceEnter = 48000;}
 		}
 		else{
-			if(time[index] == 1){
+			if(time == 1){
 				priceEnter =56000;}
 			else {
 				priceEnter =45000;}
 		}
 	}	
 	//할인율 적용하기//
-	if	(discount[index] == 1){//일반인 
+	if	(discount == 1){//일반인 
 		discountRate= 1;
-		totalPrice[index]= priceEnter*discountRate*count[index];	
-	}
-	if	(discount[index] == 2){//장애인 
+		totalPrice= priceEnter*discountRate*count;	
+		}
+	if	(discount == 2){//장애인 
 		discountRate= 0.5;
-		if(count[index] == 1){
-			totalPrice[index]= priceEnter*discountRate;
+		if(count == 1){
+			totalPrice= priceEnter*discountRate;
 		}
 		else{ //2명이상일때 2명까지 혜택적용 
-			totalPrice[index]=(priceEnter*2*discountRate)+(priceEnter*(count[index]-2));}
+			totalPrice=(priceEnter*2*discountRate)+(priceEnter*(count-2));}
 		}
-	if	(discount[index] == 3){//국가유공자 
+	if	(discount == 3){//국가유공자 
 		discountRate=0.5;
-		if (count[index] == 1)
-			totalPrice[index]= priceEnter*discountRate;
+		if (count == 1)
+			totalPrice= priceEnter*discountRate;
 		else{//2명이상일때 2명까지 혜택적용 
-			totalPrice[index]= (priceEnter*2*discountRate)+(priceEnter*(count[index]-2));}
+			totalPrice= (priceEnter*2*discountRate)+(priceEnter*(count-2));}
 		}
-	if	(discount[index] == 4){//휴가장병 
+	if	(discount == 4){//휴가장병 
 		discountRate=0.51;
-		totalPrice[index]= priceEnter*discountRate*1+priceEnter*(count[index]-1);
+		totalPrice= priceEnter*discountRate*1+priceEnter*(count-1);
 		}
-	if	(discount[index] == 5){//임산부 
+	if	(discount == 5){//임산부 
 		discountRate=0.5;
-		totalPrice[index]= priceEnter*discountRate*1+priceEnter*(count[index]-1);
+		totalPrice= priceEnter*discountRate*1+priceEnter*(count-1);
 		}
-	if	(discount[index] == 6){//다둥이 
+	if	(discount == 6){//다둥이 
 		discountRate= 0.7;
-		totalPrice[index]= priceEnter*discountRate*count[index];
+		totalPrice= priceEnter*discountRate*count;
 		}	 
+	printf("\n만나이 %d살,가격은 %d원입니다.\n감사합니다.\n\n",globalAge, totalPrice);
+
+	recordingTime[index] = time;
+	recordingType[index] = type;
+	recordingCount[index] = count;
+	recordingDiscount[index] = discount;
+	recordingTotalPrice[index] = totalPrice;
 	
-printf("\n만나이 %d살,가격은 %d원입니다.\n감사합니다.\n\n",globalAge, totalPrice[index]);
 	printf("계속발권하시겠습니까?\n1.YES\n2.NO.\n");//추가발권여부 묻기
 	scanf("%d", &issue);
 	if(issue == 1)//발권으로 돌아가기 
@@ -226,64 +233,61 @@ printf("\n만나이 %d살,가격은 %d원입니다.\n감사합니다.\n\n",globalAge, totalPrice
 		continue;
 	}
 	else if(issue == 2){//종료하기 
-		printf("\n프로그램을 종료합니다. 감사합니다\n");
+		printf("\n프로그램을 종료합니다. 감사합니다.\n\n");
 		FILE*fp = fopen("report.csv", "a");
 		printf("======================%s========================\n","판다랜드");
 	
 		for(int i=0; i<=index; i++){
-		fprintf(fp, "%d, %d, %d, %d, %d\n",  type[i], time[i], count[i], discount[i], totalPrice[i]);//csv파일 생성 add모드 
-			if(type[i] == 1){printf("종합이용권\n");//권종인쇄 
+		fprintf(fp, "%d, %d, %d, %d, %d\n",  recordingType[i], recordingTime[i], recordingCount[i], recordingDiscount[i], recordingTotalPrice[i]);//csv파일 생성 add모드 
+			if(recordingType[i] == 1){printf("종합이용권\n");//권종인쇄 
 		} 
 			else {printf("파크이용권\n");}
-		if(time[i] == 1){printf("%s\t", "1Day");//원데이, 오후타임인지 
+		if(recordingTime[i] == 1){printf("%s\t", "1Day");//원데이, 오후타임인지 
 		} 
 			else {printf("%s\t", "After4");}
-	printf("X\t%d개\t",count[i]);//개수 인쇄 
-	printf("%5d원\t", totalPrice[i]);//금액인쇄 
+	printf("X\t%d개\t",recordingCount[i]);//개수 인쇄 
+	printf("%5d원\t", recordingTotalPrice[i]);//금액인쇄 
 
 	//우대사항 문구 인쇄 
-	if	(discount[i] == 1){//일반 
+	if	(recordingDiscount[i] == 1){//일반 
 		printf("%20s\n","*우대적용없음");
 	}
-	if	(discount[i] == 2){//장애인 
+	if	(recordingDiscount[i] == 2){//장애인 
 		printf("%20s\n","*장애인우대적용");
 	}
-	if	(discount[i] == 3){//국가유공자 
+	if	(recordingDiscount[i] == 3){//국가유공자 
 		printf("%20s\n","*국가유공자우대적용");
 	}
-	if	(discount[i] == 4){//휴가장병 
+	if	(recordingDiscount[i] == 4){//휴가장병 
 		printf("%20s\n","*휴가장병우대적용");
 		}
-	if	(discount[i] == 5){//임산부 
+	if	(recordingDiscount[i] == 5){//임산부 
 		printf("%20s\n","*임산부우대적용");
 		}	
-	if	(discount[i] == 6){//다둥이 
+	if	(recordingDiscount[i] == 6){//다둥이 
 		printf("%20s\n","*다둥이우대적용");
-		
 		}
-		
 	}
 	printf("------------------------------------------------------\n");
-		int sumTotal=0;
-		for(int i=0; i<=index; i++){
-	sumTotal+=totalPrice[i];
-		}
+	int sumTotal=0;
+	for(int i=0; i<=index; i++){
+	sumTotal+=recordingTotalPrice[i];
+	}
 		
 	printf("%3d년%3d월%3d일\n", todayYear[index],todayMonth[index],todayDate[index]);
 	printf("입장료 총액은 %4d원 입니다.\n", sumTotal);
 	printf("======================================================\n");
-
 	printf("계속 진행(1: 새로운 주문, 2: 프로그램 종료) :");
 	scanf("%d", &continueOrder);
 	if(continueOrder == 1){
-	continue;	
+		printf("\n");
+		continue;
 	}
 	if (continueOrder == 2){
-	break;
+		break;
 	}	
 	fclose(fp);
-}
+	}	
 }
 return 0;
 }
-
