@@ -6,7 +6,7 @@ FILE *fp = fopen("report.csv", "r");
 const int MAX = 100;
 int index = 0;
 int recordingToday[MAX];
-int recordingType[MAX], recordingTime[MAX], recordingCount[MAX], recordingDiscount[MAX], recordingTotalPrice[MAX];
+int recordingType[MAX], recordingTime[MAX], recordingCount[MAX], recordingDiscount[MAX], recordingTotalPrice[MAX], recordingAgeGroup[MAX];
 int sumTypeAll=0; 
 int sumTypeLand=0;
 int  priceAll=0;
@@ -17,7 +17,7 @@ int typeLandOneday=0;
 int typeLandAfter4=0;
 	
 while( fscanf(fp, "%d, %d, %d, %d, %d, %d", &recordingToday[index], 
-		 &recordingType[index], &recordingTime[index], &recordingCount[index], &recordingDiscount[index], &recordingTotalPrice[index]) != -1){
+		 &recordingType[index], &recordingTime[index], &recordingCount[index], &recordingDiscount[index], &recordingTotalPrice[index], &recordingAgeGroup[index])!= -1){
 		 	index++;
 	}
 	
@@ -27,8 +27,8 @@ printf("\n==========================%s==========================\n","report.csv"
 printf("%7s %6s %9s %6s %7s %10s", "날짜", "권종", "이용시간","수량","우대사항","가격\n");
 
 for(int i = 0; i < index; i++){
-	printf("%6d %6d %9d %6d %7d %10d\n", recordingToday[i], recordingType[i], recordingTime[i],
- 	recordingCount[i], recordingDiscount[i], recordingTotalPrice[i]);
+	printf("%6d %6d %9d %6d %7d %10d, %5d\n", recordingToday[i], recordingType[i], recordingTime[i],
+ 	recordingCount[i], recordingDiscount[i], recordingTotalPrice[i], recordingAgeGroup[i]);
 }
 
 for(int j = 0; j < index; j++){
@@ -65,19 +65,21 @@ printf("\n=======================%s=======================\n","권종 별 판매현황"
 	
 printf("\n==============================================================\n\n");
 printf("\n=======================%s=======================\n","일자별매출 현황");
-	int year, month, date, totalPrice;
+	int year[MAX] ={0};
+	int month[MAX] = {0};
+	int date[MAX] ={0};
+	
 	int i, j;
 	for(i = 0; i < index; i++){
 		  for(j =i; j<=i; j++){
 		  
 	//날짜 분리하기 
-	year= (recordingToday[j]/1000);	//날짜별 총매출 
-	month= (recordingToday[j]-year*1000)/100;
-	date= recordingToday[j] - year*1000 - month*100;
-	totalPrice += recordingTotalPrice[j];
+	year[j]= (recordingToday[j]/1000);	//날짜별 총매출 
+	month[j]= (recordingToday[j]-year*1000)/100;
+	date[j]= recordingToday[j] - year*1000 - month*100;
 		}
 	}
-		printf("%d년 %d월 %d일 : ", year, month, date);	
+		printf("%d년 %d월 %d일 : ", year[j], month[j], date[j]);	
 		printf("%10s","총매출");
 		printf("%15d원", totalPrice);
 printf("\n=======================%s=======================\n","우대권 판매 현황");
