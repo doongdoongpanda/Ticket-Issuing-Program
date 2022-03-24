@@ -120,26 +120,26 @@ void typeCalculate(){//권종별 판매현황
 }
 
 void dateCalculate(){//일자별 판매현황 
-	int listedDate, count, countDate= 0 ;
+	int turn, count, countDate= 0 ;
 	int datePriceArr[MAX][2] = {0};
 
-	for(listedDate =0; listedDate < index; listedDate++)
+	for(turn =0; turn < index; turn++)
 	{
-		if(listedDate == 0)
+		if(turn == 0)
 		{
-			datePriceArr[countDate][0] = recordingToday[listedDate];
-			datePriceArr[countDate][1] += recordingTotalPrice[listedDate];
+			datePriceArr[countDate][0] = recordingToday[turn];
+			datePriceArr[countDate][1] += recordingTotalPrice[turn];
 		}
-			else if (recordingToday[listedDate] == recordingToday[listedDate-1])
+		else if (recordingToday[turn] == recordingToday[turn-1])
 			{
-			datePriceArr[countDate][1] += recordingTotalPrice[listedDate];
-			}
+			datePriceArr[countDate][1] += recordingTotalPrice[turn];
+			}		
 		else {
 			countDate++;
-		datePriceArr[countDate][0] = recordingToday[listedDate];
-		datePriceArr[countDate][1] += recordingTotalPrice[listedDate];
+		datePriceArr[countDate][0] = recordingToday[turn];
+		datePriceArr[countDate][1] += recordingTotalPrice[turn];
 		}
-		if(recordingToday[listedDate] == recordingToday[listedDate+1])
+		if(recordingToday[turn] == recordingToday[turn+1])
 		{
 		continue;
 		}
